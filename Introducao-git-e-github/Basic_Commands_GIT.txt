@@ -1,0 +1,7 @@
+git clone <link>
+-------------------------
+git init
+git add . 
+git add *
+git commit -m ""
+git push origin main
