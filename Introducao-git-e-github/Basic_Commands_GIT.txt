@@ -1,5 +1,7 @@
 git clone <link>
 -------------------------
+git remote add origin <link>
+-------------------------
 git init
 git add . 
 git add *
