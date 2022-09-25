@@ -7,3 +7,7 @@ SHOW TABLES;
  ALTER TABLE periodicos ADD CONSTRAINT fk_editora_periodico FOREIGN KEY (id_editora) REFERENCES editora(id); - Adicionando Foreign key
 INSERT INTO editora (nome_editora, pais) VALUES ('IEEE', 'EUA'), ('DataScienceMagazine', 'EUA'); - Adicionando dados
 SELECT * FROM EDITORA; - Exibir registros
+
+
+--Mapping
+SELECT <lista de atributos> FROM <tabela> WHERE <condição>
