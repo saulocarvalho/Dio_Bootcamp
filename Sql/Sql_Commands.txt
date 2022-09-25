@@ -2,6 +2,7 @@ SQL Commands
 
 SHOW DATABASES;
 USE nomeDaTabela;
+DESC nome da tabela; --descreve a tabela
 SHOW TABLES;
  ALTER TABLE periodicos ADD CONSTRAINT fk_editora_periodico FOREIGN KEY (id_editora) REFERENCES editora(id); - Adicionando Foreign key
 INSERT INTO editora (nome_editora, pais) VALUES ('IEEE', 'EUA'), ('DataScienceMagazine', 'EUA'); - Adicionando dados
