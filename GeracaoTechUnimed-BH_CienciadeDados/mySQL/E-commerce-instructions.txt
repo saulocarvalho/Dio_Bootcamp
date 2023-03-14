@@ -1,0 +1,26 @@
+Proje e-commerce
+
+Entidadades:
+	- Produto
+	- Cliente
+	- Pedido
+	- Estoque
+	- Fornecedor 
+
+Não pode vender produtos de terceiro
+CAda produto tem 1 fornecedor
+1 ou mais produto no pedido
+
+Cliente tem CPF ou CNPJ
+Endereço = valor do frete 
+
+Cliente compra mais de 1 produto
+periodo para devolução do produto
+
+--- pedido ---
+São criados por clientes e possui info de compra, endereço e 
+status de entrega
+1 produto ou mais compoe o pedido 
+Pedido pode ser cancelado
+
+--- Fornecedor e Estoque --- 
