@@ -1,3 +1,4 @@
+drop schema company;
 create schema if not exists company;
 #caso não queira/esteja dentro do banco e queira criar uma tabela, basta usar 'create table nomedobanco.nomedanovatable'
 create table company.employee(
