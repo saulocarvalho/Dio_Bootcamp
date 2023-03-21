@@ -75,3 +75,7 @@ select * from project;
 
 select * from project, works_on where Pnumber = Pno;
 select Pname, Essn, Fname, hours from project, works_on, employee where Pnumber = Pno and Essn = Ssn;
+
+#Testando Alias
+select E.Fname, E.Lname, S.Fname, S.Lname from employee as E,
+		employee as S where E.Super_ssn = S.Ssn;
