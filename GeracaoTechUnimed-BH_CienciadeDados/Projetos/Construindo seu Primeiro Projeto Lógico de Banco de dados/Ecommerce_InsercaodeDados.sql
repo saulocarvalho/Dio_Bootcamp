@@ -17,7 +17,7 @@ insert into produto (ProdutoNome, ClassificadoCriancas, Categoria, avaliacao, di
                               ('Sofá retrátil',False,'Móveis','3','3x57x80'),
                               ('Farinha de arroz',False,'Alimentos','2',null),
                               ('Fire Stick Amazon',False,'Eletrônico','3',null);
-         
+select * from produto;
 #delete from pedido where idPedido in (9,10,11,12,13,14,15,16);         
 insert into pedido (idPedidoCliente, PedidoStatus, Descricao, Frete) values 
 							 (1, default,'compra via aplicativo',null),
