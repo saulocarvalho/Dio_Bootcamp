@@ -39,7 +39,7 @@ insert into estoque (Localizacao,Quantidade) values
                             ('São Paulo',10),
                             ('Brasília',60);
                             
-insert into estoqueLocalizacao (idLproduto, idLestoque,localizacao) values
+insert into estoqueProduto (idLproduto, idLestoque,localizacao) values
 						 (1,2,'RJ'),
                          (2,6,'GO');
                          
@@ -64,3 +64,14 @@ select * from vendedor;
 insert into produtoVendedor (idProdutoVendedor, idProduto, Quantidade) values 
 						 (1,6,80),
                          (2,7,10);
+                         
+select * from cliente;
+
+#Numero de clientes que tenho
+select count(*) from cliente;
+
+select concat (PNome, ' ',Sobrenome) as NomeCompleto, idPedido, PedidoStatus
+			from cliente c, pedido p where c.idcliente = idPedidoCliente;
+            
+insert into pedido (idPedidoCliente, PedidoStatus, Descricao, Frete) values 
+			(2, default, 'Compra via Aplicativo', null);

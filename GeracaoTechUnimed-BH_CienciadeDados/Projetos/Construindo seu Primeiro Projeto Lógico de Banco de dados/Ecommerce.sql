@@ -101,14 +101,15 @@ create table produtoPedido(
         constraint fk_produto_pedido foreign key (idProdutoProduto) references produto(idProduto),
         constraint fk_pedido_pedido foreign key (idProdutoPedido) references  pedido(idPedido)
 );
-
-create table estoqueLocalizacao(
+desc produtoPedido;
+select * from produtoPedido;
+create table estoqueProduto(
 		idLproduto int,
         idLestoque int ,
         localizacao varchar (255) not null,
         primary key (idLproduto, idLestoque),
-        constraint fk_estoqueLocalizacao_produto foreign key (idLproduto) references produto(idProduto),
-        constraint fk_estoqueLocalizacao_estoque foreign key (idLestoque) references  estoque(idEstoque)
+        constraint fk_estoqueProduto_produto foreign key (idLproduto) references produto(idProduto),
+        constraint fk_estoqueProduto_estoque foreign key (idLestoque) references  estoque(idEstoque)
 );
 
 create table produtoFornecedor(
