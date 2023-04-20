@@ -63,7 +63,7 @@ constraint fk_idCliente_Cliente foreign key (Cliente_idCliente) references Clien
 );
 
 create table Pagamento(
-idPagamento int,
+idPagamento int auto_increment,
 Cliente_idClientePF int,
 Cliente_idClientePJ int,
 Pedido_idPedido int,
@@ -72,8 +72,10 @@ Pagamento_CartaoNumero char(12),
 Pagamento_CartaoValidade char(6),
 Pagamento_CartaoCVV char(3),
 Pagamento_ValorTotal float,
-primary key (idPagamento, Cliente_idClientePF, Cliente_idClientePJ),
-constraint fk_idPedido_Pedido foreign key (Pedido_idPedido) references Pedido(idPedido)
+primary key (idPagamento),
+constraint fk_idPedido_Pedido foreign key (Pedido_idPedido) references Pedido(idPedido),
+constraint fk_ClienteidClientePF_ClientePF foreign key (Cliente_idClientePF) references ClientePF(idClientePF),
+constraint fk_ClienteidClientePJ_ClientePJ foreign key (Cliente_idClientePJ) references ClientePJ(idClientePJ)
 );
 
 create table Estoque(
