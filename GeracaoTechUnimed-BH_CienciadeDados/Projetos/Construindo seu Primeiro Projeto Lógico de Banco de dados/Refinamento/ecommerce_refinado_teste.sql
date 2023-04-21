@@ -1,4 +1,5 @@
 #Criação database ecommerce_refinado
+#drop database ecommerce_refinado_teste;
 create database ecommerce_refinado_teste;
 use ecommerce_refinado_teste;
 show tables;
