@@ -45,10 +45,10 @@ constraint fk_idClientePJ_ClientePJ foreign key (Cliente_idClientePJ) references
 create table Produto(
 idProduto int auto_increment primary key,
 Produto_Nome varchar (45) not null,
-Produto_Categoria ENUM('Eletrônico', 'Vestimenta', 'Brinquedos', 'Alimentos', 'Móveis') not null,
+Produto_Categoria ENUM('Notebook', 'Desktop', 'Memória', 'Placa de Vídeo', 'Placa mãe') not null,
 Produto_Descricao varchar(255),
 Produto_Marca varchar (20) not null,
-Produto_Modelo varchar(20) not null,
+Produto_Modelo varchar(40) not null,
 Produto_Avaliacao float,
 Produto_Valor float not null
 );
@@ -58,8 +58,9 @@ idPedido int auto_increment primary key,
 Cliente_idCliente int,
 Pedido_Status ENUM('Cancelado', 'Confirmado', 'Em processamento') default 'Em processamento' not null,
 Pedido_Descricao varchar(255),
-Pedido_CodRastreamento int,
+Pedido_CodRastreamento char(6),
 Pedido_ValorFrete float,
+constraint unique_CodRastreamento_Pedido unique (Pedido_CodRastreamento),
 constraint fk_idCliente_Cliente foreign key (Cliente_idCliente) references Cliente(idCliente)
 );
 
@@ -68,11 +69,12 @@ idPagamento int auto_increment,
 Cliente_idClientePF int,
 Cliente_idClientePJ int,
 Pedido_idPedido int,
-Pagamento_TipoPagamento ENUM('Cartão de crédito', 'Cartão de Débito', 'PIX', 'Dinheiro') not null,
+Pagamento_TipoPagamento ENUM('Cartão de crédito', 'Cartão de Débito', 'PIX', 'Boleto') not null,
 Pagamento_CartaoNumero char(12),
 Pagamento_CartaoValidade char(6),
 Pagamento_CartaoCVV char(3),
 Pagamento_ValorTotal float,
+Pagamento_Aprovado boolean default true,
 primary key (idPagamento),
 constraint fk_idPedido_Pedido foreign key (Pedido_idPedido) references Pedido(idPedido),
 constraint fk_ClienteidClientePF_ClientePF foreign key (Cliente_idClientePF) references ClientePF(idClientePF),
@@ -81,8 +83,8 @@ constraint fk_ClienteidClientePJ_ClientePJ foreign key (Cliente_idClientePJ) ref
 
 create table Estoque(
 idEstoque int auto_increment primary key,
-Estoque_Localizacao varchar(45) not null,
-Estoque_Quantidade varchar(45) not null
+Estoque_Cidade varchar(45) not null,
+Estoque_UF char(2) not null
 );
 
 create table Fornecedor(
@@ -161,7 +163,7 @@ constraint fk_idPedidoProduto_Produto foreign key (Produto_idProduto) references
 create table EstoqueProduto(
 Estoque_idEstoque int,
 Produto_idProduto int,
-EstoqueProduto_UF char(2),
+EstoqueProduto_Quantidade int not null,
 primary key (Estoque_idEstoque, Produto_idProduto),
 constraint fk_idEstoqueProduto_Estoque foreign key (Estoque_idEstoque) references Estoque (idEstoque),
 constraint fk_idEstoqueProduto_Produto foreign key (Produto_idProduto) references Produto(idProduto)

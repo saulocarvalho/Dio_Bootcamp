@@ -7,7 +7,7 @@ insert into clientePF (ClientePF_CPF, ClientePF_Nome, ClientePF_Sobrenome, Clien
 
 	   values(12346789421, 'Emanuel', 'M Carvalho', '2002-07-05'),
 			(65487465254, 'Saulo', 'D Carvalho', '2000-12-02'),
-            (12332125125, 'Jorge', 'T Garlhado', '1997-05-13'),
+            (12332125125, 'Jorge', 'T Galhardo', '1997-05-13'),
             (22664456504, 'Ryan', 'F Vilar', '1973-03-24');
             
 
@@ -23,34 +23,65 @@ select * from Cliente;
 
 
 
-select  * from  cliente join ClientePF
-			where idCliente = Cliente_idClientePF;
+select  distinct * from  cliente where exists (select cliente_idClientePF from ClientePF);
+						
 
 insert into produto (Produto_Nome, Produto_Categoria, Produto_Descricao, Produto_Marca, Produto_Modelo, Produto_Avaliacao, Produto_Valor) values
-							  ('Notebook Dell Vostro 3510','Eletrônico','Notebook de alto desempenho para uso diário...','Dell', 'Vostro 3510', 4.8, 3500);
+							  ('Notebook Dell Vostro 3510','Notebook','11ª geração Intel® Core™ i5-1135G7 (4-core, cache de 8MB, até 4.2GHz)','Dell', 'Vostro 3510', 4.8, 3500),
+                              ('Desktop Dell XPS 8950', 'Desktop', '12ª geração Intel® Core™ i7-12700 - NVIDIA® GeForce RTX™ 3060 12GB GDDR6 - Memória de 16GB DDR5 SSD de 256GB PCIe NVMe M.2 + HD de 1TB (7200RPM)',
+                              'Dell', 'XPS 8950', 5, 10449),
+                              ('Memória Kingston Fury Beast', 'Memória', 'Memória Kingston Fury Beast, 8GB, 3200MHz, DDR4, CL16, Preto - KF432C16BB/8' ,'Kingston', 'Fury Beast', 4.9, 172.99),
+                              ('PNY NVIDIA Geforce RTX 3060','Placa de Vídeo', 'Placa de Video PNY NVIDIA Geforce RTX 3060, 12 GB GDDR6, DLSS, Ray Tracing - VCG306012DFBPB1', 'PNY', 'RTX 3060', 4, 2310.99),
+							  ('Asus TUF Gaming', 'Placa Mãe', 'Placa Mãe Asus TUF Gaming B660M-PLUS D4, Intel LGA 1700, mATX, DDR4, RGB', 'Asus', 'B660M-PLUS D4', 5, 1199.99),
+                              ('Notebook ASUS VivoBook X513EA', 'Notebook', 'Intel® Core™ i5 - 11ª Geração - Intel® Iris® Xe - 16GB - 256GB SSD', 'Asus', 'X513EA-BQ3400W', 4.7, 4049.10);
+                              
                               
                               
 select * from Produto;
 
 insert into pedido (Cliente_idCliente, Pedido_Status, Pedido_Descricao, Pedido_CodRastreamento, Pedido_ValorFrete) values 
-							 (1, default,'Compra via App',25648, 150);
-                             
-select * from cliente, ClientePF inner join pedido where idCliente = Cliente_idCliente;
+							 (1, default,'Compra via App',25648, 150),
+                             (1, 'Confirmado', 'Compra via Web Site', 54845, 100),
+                             (2, default, 'Compra via App', 54421, 50),
+                             (3, 'Cancelado', 'Com via Web Site', null, null),
+                             (3, default, 'Compra via Web Site', 54231, 40),
+                             (4, 'Confirmado', 'Compra via App', 89541, 120);
+select * from pedido;
+select * from pedido join cliente on Cliente_idCliente = idCliente
+						join ClientePF on idCliente = idClientePF;					
 
 
 insert into PedidoProduto (Pedido_idPedido, Produto_idProduto, PedidoProduto_Quantidade, PedidoProduto_Status, PedidoProduto_DataPedido) values
-						 (1,1,1,default, '2023-04-20');
+						 (1,3,2,default, '2023-01-23'),
+                         (2, 5, 1, default, '2023-01-17'),
+                         (3, 2, 1, default, '2023-03-01'),
+                         (4, 6, 1, 'Sem estoque', '2023-04-14'),
+                         (5, 1, 1, default, '2023-04-20'),
+                         (6, 4, 2, default, '2023-04-24');
                          
                          
-select * from ClientePF inner join PedidoProduto on idClientePF = Pedido_idPedido
-							inner join produto on idProduto = Pedido_idPedido;
+select concat (ClientePF_Nome,' ', ClientePF_Sobrenome) as NomeCliente, Produto_Nome, Produto_Categoria, PedidoProduto_Quantidade as Quantidade, Produto_Descricao, Produto_Valor, Pedido_CodRastreamento, Pedido_ValorFrete  
+							from PedidoProduto inner join pedido on Pedido_idPedido = idPedido
+							inner join produto on Produto_idProduto = idProduto
+                            inner join Cliente on Cliente_idCliente = idCliente
+                            inner join ClientePF on idCliente = idClientePF;
 
-insert into Pagamento (Cliente_idClientePF, Cliente_idClientePJ, Pedido_idPedido, Pagamento_TipoPagamento, Pagamento_CartaoNumero, Pagamento_CartaoValidade, Pagamento_CartaoCVV, Pagamento_ValorTotal) values
-						(1, null, 1, 'Cartão de crédito', 123456789102, 072027, 666, 3650);
+insert into Pagamento (Cliente_idClientePF, Cliente_idClientePJ, Pedido_idPedido, Pagamento_TipoPagamento, Pagamento_CartaoNumero, Pagamento_CartaoValidade, Pagamento_CartaoCVV, Pagamento_ValorTotal, Pagamento_Aprovado) values
+						(1, null, 1, 'Cartão de crédito', 123456789102, 072027, 666, 322.99, default),
+                        (1,null, 2, 'Cartão de crédito', 534456200102, 042030, 412, 1299.99, default),
+                        (2, null, 3, 'PIX', null, null, null, 10549, default),
+                        (3,null, 4, 'Cartão de débito', 942255021347, 01229, 987, 4049.10, false),
+                        (3, null, 5, 'Cartão de débito', 942255021347, 01229, 987, 3540, default),
+                        (4, null, 6, 'Boleto', null, null, null, 2430.99, default);
+select * from pagamento as p inner join Cliente as c on c.idCliente = p.Cliente_idClientePF
+						inner join ClientePF as cpf on cpf.idClientePF = c.idCliente;
                         
-select * from ClientePF inner join PedidoProduto as pp on idClientePF = pp.Pedido_idPedido
-						inner join produto on idProduto = Pedido_idPedido
-                        inner join Pagamento as pa on pp.Pedido_idPedido = pa.Pedido_idPedido; 
+select concat (ClientePF_Nome,' ', ClientePF_Sobrenome) as NomeCliente, Produto_Nome, Produto_Categoria, PedidoProduto_Quantidade as Quantidade, Produto_Descricao, Produto_Valor, Pedido_ValorFrete , Pagamento_TipoPagamento, Pagamento_ValorTotal, Pedido_Status, Pagamento_Aprovado
+							from pedido as pe inner join PedidoProduto as pp on pe.idPedido = pp.Pedido_idPedido
+							inner join produto as p on p.idProduto = pp.Produto_idProduto
+                            inner join pagamento as pa on pa.Pedido_idPedido = pe.idPedido
+                            inner join Cliente as c on c.idCliente = pe.Cliente_idCliente
+                            inner join ClientePF as cpf on cpf.idClientePF = idCliente;
                         
 insert into estoque (Estoque_Localizacao,Estoque_Quantidade) values 
 							('Maceió',1000),
@@ -62,6 +93,7 @@ insert into estoque (Estoque_Localizacao,Estoque_Quantidade) values
          select * from estoqueProduto inner join estoque on Estoque_idEstoque = idEstoque;                   
 insert into estoqueProduto (Estoque_idEstoque, Produto_idProduto,EstoqueProduto_UF) values
 						 (1,1,'AL'),
+                         (1, 2, 'AL'),  ###Tabela alterar, inserir dados e reprocessar tudo
                          (6,1,'DF');
                          
 insert into fornecedor (Fornecedor_RazaoSocial, Fornecedor_CNPJ, Fornecedor_NomeFantasia, Fornecedor_Email, Fornecedor_Celular,
