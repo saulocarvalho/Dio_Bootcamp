@@ -83,24 +83,38 @@ select concat (ClientePF_Nome,' ', ClientePF_Sobrenome) as NomeCliente, Produto_
                             inner join Cliente as c on c.idCliente = pe.Cliente_idCliente
                             inner join ClientePF as cpf on cpf.idClientePF = idCliente;
                         
-insert into estoque (Estoque_Localizacao,Estoque_Quantidade) values 
-							('Maceió',1000),
-                            ('João Pessoa',500),
-                            ('Belo Horizonte',10),
-                            ('Manaus',100),
-                            ('São Paulo',10),
-                            ('Brasília',60);  
-         select * from estoqueProduto inner join estoque on Estoque_idEstoque = idEstoque;                   
-insert into estoqueProduto (Estoque_idEstoque, Produto_idProduto,EstoqueProduto_UF) values
-						 (1,1,'AL'),
-                         (1, 2, 'AL'),  ###Tabela alterar, inserir dados e reprocessar tudo
-                         (6,1,'DF');
-                         
+insert into estoque (Estoque_Cidade,Estoque_UF) values 
+							('Maceió','AL'),
+                            ('João Pessoa','PB'),
+                            ('Belo Horizonte','MG'),
+                            ('Manaus','AM'),
+                            ('São Paulo','SP'),
+                            ('Brasília','DF');  
+                            
+		select * from produto;
+         select * from estoqueProduto inner join estoque on Estoque_idEstoque = idEstoque
+										inner join produto on idProduto = Produto_idProduto;
+insert into estoqueProduto (Estoque_idEstoque, Produto_idProduto,EstoqueProduto_Quantidade) values
+						 (1,3,100),   #1 note dell 2 desktop dell 3 memoria 4 placa video 5 placa mae 6 note asus
+                         (1, 4, 30),
+                         (1, 5, 15),
+                         (2, 6, 60),
+                         (3, 3, 200),
+                         (3, 5, 45),
+                         (4, 6, 300),
+                         (5, 1, 400),
+                         (5, 2, 300),
+                         (6,6,200);
+select Produto_Nome, Produto_Marca, EstoqueProduto_Quantidade, Estoque_cidade, Estoque_UF 
+										from estoqueProduto 
+                                        inner join estoque on Estoque_idEstoque = idEstoque
+										inner join produto on idProduto = Produto_idProduto;   
+                                        
 insert into fornecedor (Fornecedor_RazaoSocial, Fornecedor_CNPJ, Fornecedor_NomeFantasia, Fornecedor_Email, Fornecedor_Celular,
 						Fornecedor_Telefone, Fornecedor_CEP, Fornecedor_Logradouro, Fornecedor_Numero, Fornecedor_Complemento, Fornecedor_Bairro,
                         Fornecedor_Municipio, Fornecedor_UF) values 
 							('Almeida e filhos', 12345678912345,'Marquinhos construções', 'marquinhos@marquinhos.com.br',
-                            77955442232, 7733150121, 57435214, 'Rua abcs', 542, null, 'desconhecidos', 'Salvador', 'BH'),
+                            77955442232, 7733150121, 57435214, 'Rua abcs', 542, null, 'desconhecidos', 'Salvador', 'BA'),
                             ('Eletrônicos Silva',85419649143457,'Flavinho do eletrônico', 'flavinho@flavio.com.br',null,6133998424,
                             47895324, 'Rua Trindade', 578, null, 'Asa Norte', 'Ceilândia', 'DF'),
                             ('Eletrônicos Emanoshow', 93456789934695,'Emanuelsonzin eletro', 'emanuelson@sonzin.com.br', 
@@ -109,33 +123,67 @@ insert into fornecedor (Fornecedor_RazaoSocial, Fornecedor_CNPJ, Fornecedor_Nome
 select * from fornecedor;
                             
 insert into FornecedorProduto (Fornecedor_idFornecedor, Produto_idProduto, FornecedorProduto_Quantidade) values
-						 (7,1,200),
-                         (9,1,140);                            
+						 (1,3,1300),   #1 note dell 2 desktop dell 3 memoria 4 placa video 5 placa mae 6 note asus
+                         (1,4,1154),
+                         (1,5,980),
+                         (2,6, 800),
+                         (3, 1, 1540),
+                         (3,2, 1354);                            
                             
-select Fornecedor_RazaoSocial, Fornecedor_NomeFantasia, Produto_Nome, FornecedorProduto_Quantidade from fornecedor 
+select Fornecedor_RazaoSocial, Fornecedor_NomeFantasia, Produto_Nome, FornecedorProduto_Quantidade, Fornecedor_UF from fornecedor 
 						inner join FornecedorProduto on Fornecedor_idFornecedor = idFornecedor
 						inner join Produto on Produto_idProduto = idProduto;
 
 insert into vendedor (Vendedor_RazaoSocial, Vendedor_NomeFantasia, Vendedor_CNPJ, Vendedor_Email, Vendedor_Celular, Vendedor_Telefone,
 						Vendedor_CEP, Vendedor_Logradouro, Vendedor_Numero, Vendedor_Complemento, Vendedor_Bairro, Vendedor_Municipio, Vendedor_UF) values 
 						('Tech eletronics', 'Technology', 23456789456321, 'tech@tech.com.br', 21988547414, null, 12354684, 'Rua Rio blue',
-                        '5487',null, 'Barra da Tijuca', 'Rio de Janeiro', 'RJ'),
+                        '5487',null, 'Tambaú', 'João Pessoa', 'PB'),
 					    ('Botique Durgas','Durgas',12345678374541,'durgas@durgas.com.br',null, 3855446622, 98754214,'Rua Minas',74, null,
-                        'Jaboatão','Unai', 'MG'),
+                        'Jaboatão','Belo Horizonte', 'MG'),
 						('Kids World','KW',45678912365448,'kw@kidsworld.com.br',11988552288, 1166554477, 77798542,'Rua da Liberdade',777, null,
-                        'Liberdade','São Paulo', 'SP');
+                        'Liberdade','São Paulo', 'SP'),
+                        ('Camille & Moraes Tecnologia', 'CMT', '13167385000128', 'camille.moraes@cmoraes.com.br', 82998552142, null, 57040509, '5ª Travessa Santo Antonio', 25,
+                        null, 'Jatiúca','Maceió', 'AL'),
+                        ('Regufe Tech', 'Regufe ','47271766000174', 'brunna@regufe.com.br', null, 9235650744, 69036070, 'Beco Lobo Soropita', 823, null,
+                        'Compensa', 'Manaus', 'AM');
                         
 select * from vendedor;
 
 insert into VendedorProduto (Vendedor_idVendedor, Produto_idProduto, VendendorProduto_Quantidade) values 
-						 (1,1,43),
-                         (3,1,17),
-                         (2,1,8);
+						 (1,1,3), #1 note dell 2 desktop dell 3 memoria 4 placa video 5 placa mae 6 note asus
+                         (1,2,1),
+                         (1,3,8),
+                         (1,4,12),
+                         (1,5,7),
+                         (1,6,5),
+                         (2,1,10),
+                         (2,2,7),
+                         (2,3,25),
+                         (2,4,14),
+                         (2,5,11),
+                         (2,6,5),
+                         (3,1,30),
+                         (3,2,35),
+                         (3,3,40),
+                         (3,4,50),
+                         (3,5,15),
+                         (3,6,22),
+                         (4,1,15),
+                         (4,2,12),
+                         (4,3,30),
+                         (4,4,8),
+                         (4,5,3),
+                         (4,6,0),
+                         (5,1,0),
+                         (5,2,0),
+                         (5,3,15),
+                         (5,4,8),
+                         (5,5,4),
+                         (5,6,30);
                          
-select vendedor_RazaoSocial, produto_Nome, VendendorProduto_Quantidade, Fornecedor_RazaoSocial, FornecedorProduto_Quantidade  from Vendedor inner join VendedorProduto on Vendedor_idVendedor = idVendedor
-										inner join produto as p on Produto_idProduto = p.idProduto
-                                        inner join FornecedorProduto as fp on fp.Produto_idProduto = p.idProduto
-                                        inner join fornecedor as f on f.idFornecedor = fp.Fornecedor_idFornecedor;
+select * from VendedorProduto inner join produto on Produto_idProduto = idProduto
+								inner join vendedor on Vendedor_idVendedor = idVendedor
+                                order by Vendedor_RazaoSocial; 
 #Não consegui o resultado que queria com a query acima
                                         
 
