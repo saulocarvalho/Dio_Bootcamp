@@ -3,22 +3,8 @@ show databases;
 create database oficina;
 
 use oficina;
-
-create table Veiculo (
-idVeiculo int auto_increment primary key,
-Veiculo_Placa char(7) not null,
-Veiculo_Marca varchar (30) not null,
-Veiculo_Modelo varchar(70) not null,
-Veiculo_Ano year not null ,
-Veiculo_Cor varchar(15) not null,
-Veiculo_Renavam char(11) not null,
-constraint unique_placa_VeiculoPlaca unique (Veiculo_Placa),
-constraint unique_chassi_VeiculoRenavam unique (Veiculo_Renavam)
-);
-alter table Veiculo auto_increment = 1;
 create table Cliente(
 idCliente int auto_increment primary key,
-Veiculo_idVeiculo int,
 Cliente_CPF char(11) not null,
 Cliente_Nome varchar(10) not null,
 Cliente_Sobrenome varchar(25) not null,
@@ -32,12 +18,26 @@ Cliente_Complemento varchar (20),
 Cliente_Bairro varchar (15) not null,
 Cliente_Municipio varchar(20) not null,
 Cliente_UF char(2) not null,
-constraint fk_VeiculoidVeiculo_idVeiculo foreign key (Veiculo_idVeiculo) references Veiculo(idVeiculo),
 constraint unique_CPF_ClienteCPF unique (Cliente_CPF),
 constraint unique_Email_ClienteEmail unique (Cliente_Email),
 constraint unique_Celular_ClienteCeuluar unique (Cliente_Celular)
 );
 alter table Cliente auto_increment = 1;
+
+create table Veiculo (
+idVeiculo int auto_increment primary key,
+Cliente_idCliente int,
+Veiculo_Placa char(7) not null,
+Veiculo_Marca varchar (30) not null,
+Veiculo_Modelo varchar(70) not null,
+Veiculo_Ano year not null ,
+Veiculo_Cor varchar(15) not null,
+Veiculo_Renavam char(11) not null,
+constraint fk_ClienteidCliente_idCliente foreign key (Cliente_idCliente) references Cliente(idCliente),
+constraint unique_placa_VeiculoPlaca unique (Veiculo_Placa),
+constraint unique_chassi_VeiculoRenavam unique (Veiculo_Renavam)
+);
+alter table Veiculo auto_increment = 1;
 
 create table Orcamento(
 idOrcamento int auto_increment primary key,
@@ -77,12 +77,14 @@ Produto_Valor float not null
 );
 alter table Produto auto_increment = 1;
 
-create table OrcamentoCliente(
+create table OrcamentoVeiculo(
 Orcamento_idOrcamento int,
 Cliente_idCliente int,
-OrcamentoCliente_DataPrevistaEntrega date not null,
+Veiculo_idVeiculo int,
+OrcamentoVeiculo_DataPrevistaEntrega date not null,
 primary key (Orcamento_idOrcamento,Cliente_idCliente),
-constraint fk_ClienteidCliente_idCliente foreign key (Cliente_idCliente) references Cliente(idCliente),
+constraint fk_OrcamentoVeiculoidVeiculo_idVeiculo foreign key (Veiculo_idVeiculo) references Veiculo(idVeiculo),
+constraint fk_OrcamentoidCliente_idCliente foreign key (Cliente_idCliente) references Cliente(idCliente),
 constraint fk_OrcamentoidOrcamento_idOrcamento foreign key (Orcamento_idOrcamento) references Orcamento(idOrcamento)
 );
 
