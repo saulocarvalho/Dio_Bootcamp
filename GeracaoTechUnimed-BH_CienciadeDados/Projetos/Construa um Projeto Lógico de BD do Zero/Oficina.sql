@@ -43,8 +43,7 @@ create table Orcamento(
 idOrcamento int auto_increment primary key,
 Orcamento_Descricao varchar (255) not null,
 Orcamento_TipoServico varchar (45) not null,
-Orcamento_Data date not null,
-Orcamento_Valor float not null
+Orcamento_Data date not null
 );
 alter table Orcamento auto_increment = 1;
 
@@ -65,7 +64,7 @@ OS_Protocolo char(8) not null,
 OS_DataEmissao date not null,
 OS_DataConclusao date not null,
 OS_ValorTotal float not null,
-OS_Garantia date not null,
+OS_Garantia date,
 constraint unique_protocolo_OSProtocolo unique (OS_Protocolo)
 );
 alter table OrdemServico auto_increment = 1;
@@ -79,12 +78,10 @@ alter table Produto auto_increment = 1;
 
 create table OrcamentoVeiculo(
 Orcamento_idOrcamento int,
-Cliente_idCliente int,
 Veiculo_idVeiculo int,
 OrcamentoVeiculo_DataPrevistaEntrega date not null,
-primary key (Orcamento_idOrcamento,Cliente_idCliente),
+primary key (Orcamento_idOrcamento,Veiculo_idVeiculo),
 constraint fk_OrcamentoVeiculoidVeiculo_idVeiculo foreign key (Veiculo_idVeiculo) references Veiculo(idVeiculo),
-constraint fk_OrcamentoidCliente_idCliente foreign key (Cliente_idCliente) references Cliente(idCliente),
 constraint fk_OrcamentoidOrcamento_idOrcamento foreign key (Orcamento_idOrcamento) references Orcamento(idOrcamento)
 );
 
@@ -106,14 +103,14 @@ constraint fk_OSidOrdemServico_idOrdemServico foreign key (OS_idOrdemServico) re
 constraint fk_OSOOrcamento_idOrcamento foreign key (Orcamento_idOrcamento) references Orcamento(idOrcamento)
 );
 
-create table OSMecanico(
-OS_idOrdemServico int,
-Mecanico_idMecanico int,
-OSMecanico_MaoDeObra float not null,
-primary key (OS_idOrdemServico, Mecanico_idMecanico),
-constraint fk_OSMidOrdemServico_idOrdemServico foreign key (OS_idOrdemServico) references OrdemServico(idOrdemServico),
-constraint fk_OSMecanicoidMecanico_idMecanico foreign key (Mecanico_idMecanico) references Mecanico(idMecanico)
-);
+#create table OSMecanico(
+#OS_idOrdemServico int,
+#Mecanico_idMecanico int,
+#OSMecanico_MaoDeObra float not null,
+#primary key (OS_idOrdemServico, Mecanico_idMecanico),
+#constraint fk_OSMidOrdemServico_idOrdemServico foreign key (OS_idOrdemServico) references OrdemServico(idOrdemServico),
+#constraint fk_OSMecanicoidMecanico_idMecanico foreign key (Mecanico_idMecanico) references Mecanico(idMecanico)
+#);
 
 create table OSProduto(
 OS_idOrdemServico int,

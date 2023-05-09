@@ -19,8 +19,70 @@ insert into Veiculo (Cliente_idCliente, Veiculo_Placa, Veiculo_Marca, Veiculo_Mo
                     (2, 'MUY7150','Fiat', 'Strada 1.3 mpi Fire 8V 67cv CE', '2003', 'Azul', '89664924524' ),
                     (3, 'MVD8569', 'Fiat', 'Fiat Mille', '2001', 'Vermelho', '76039098940');
                     
-select * from Veiculo inner join Cliente on Cliente_idCliente = idCliente;                            
-                            
+select * from Veiculo inner join Cliente on Cliente_idCliente = idCliente;         
 
-              
+insert into mecanico (Mecanico_Matricula, Mecanico_Nome, Mecanico_CPF, Mecanico_Especialidade)
+			values ('5469852','Agenor Rangel Portela', '93835735462', 'Nível I'),
+					('5423658','Aparecida Holanda da Sousa', '78218650440', 'Nível I'),
+                    ('0598753','Aderbal Braz Mesquita', '85634362440', 'Nível II'),
+                    ('7776542','Adso Holanda Campelo', '25163347454', 'Nível II'),
+                    ('1325648','Ezeni Sá Norte', '81430576405', 'Nível III');
+
+select * from mecanico;
+
+insert into Orcamento (Orcamento_Descricao, Orcamento_TipoServico, Orcamento_Data)
+			values ('Troca da correia dentada', 'Mecanico', '2023-05-15'),
+					('Troca de Oleo', 'Mecanico', '2023-05-10'),
+                    ('Troca da embreagem', 'Mecanico', '2023-06-02'),
+                    ('Troca dos Farois', 'Eletrico', '2023-05-25'),
+                    ('Troca de Oleo', 'Mecanico', '2023-06-02');
+
+select * from Orcamento;
+
+insert into OrdemServico (OS_Protocolo, OS_DataEmissao, OS_DataConclusao, OS_ValorTotal, OS_Garantia)
+			values ('12345678', '2023-05-15', '2023-05-18', '380', '2025-05-18'),
+					('87654321', '2023-05-10', '2023-05-11', '280', null),
+                    ('55442266', '2023-06-05', '2023-06-20', '1500', '2028-06-20'),
+                    ('10235047', '2023-05-29', '2023-05-29', '140', '2024-05-29'),
+                    ('10156841', '2023-06-05', '2023-06-20', '280', null);
+                      
+
+insert into Produto (Produto_Descricao,Produto_Valor)
+			values ('Correia dentada', '300'),
+					('Oleo', '200'),
+                    ('Kit Embreagem', '1200'),
+                    ('Farol', '120'),
+                    ('Oleo', '200');
+                    
+                    
+insert into OrcamentoVeiculo (Orcamento_idOrcamento, Veiculo_idVeiculo, OrcamentoVeiculo_DataPrevistaEntrega)
+			values ('1', '3', '2023-05-18'),
+					('2', '4', '2023-05-10'),
+                    ('3', '2', '2023-06-20'),
+                    ('4', '7', '2023-05-29'),
+                    ('5', '2', '2023-06-20');
+
+select * from OrcamentoVeiculo;
+
+ insert into OrcamentoMecanico(Orcamento_idOrcamento, Mecanico_idMecanico, OrcamentoMecanico_ValorMecanico)
+				values ('1', '3', '80'),
+						('2', '2', '80'),
+                        ('3', '5', '300'),
+                        ('4', '1', '40'),
+                        ('5', '2', '80');
+ 
+insert into OSOrcamento (OS_idOrdemServico,Orcamento_idOrcamento, OSOrcamento_valor) 
+				values ('1', '1', '300'),
+						('2', '2', '200'),
+                        ('3', '3', '1200'),
+                        ('4', '4', '100'),
+                        ('5', '5', '200');
+
+insert into OSProduto (OS_idOrdemServico, Produto_idProduto, OSProduto_Quantidade)
+				values ('1', '1', '1'),
+						('2', '2', '1'),
+                        ('3', '3', '4'),
+                        ('4', '4', '2'),
+                        ('5', '2', '1');
+
 

@@ -17,6 +17,12 @@ select ClientePF_nome, count(*) as NumeroPedidos from Cliente inner join Cliente
 			inner join pedido on idClientePF = Cliente_idCliente
 			group by idCliente;
             
+#Quantidade de pedido por cliente, onde a quantidade de pedidos são maiores que 1
+select ClientePF_nome, count(*) as NumeroPedidos from Cliente inner join ClientePF on idCliente = idClientePF
+			inner join pedido on idClientePF = Cliente_idCliente
+			group by idCliente
+            having count(*) > 1;
+            
 #Quantidade de produto por estoque
 select Produto_Nome, Produto_Marca, EstoqueProduto_Quantidade, Estoque_cidade, Estoque_UF 
 										from estoqueProduto 
