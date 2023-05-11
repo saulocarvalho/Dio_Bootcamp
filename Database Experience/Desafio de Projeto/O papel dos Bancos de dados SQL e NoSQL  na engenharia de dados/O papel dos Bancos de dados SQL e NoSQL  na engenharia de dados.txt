@@ -1,0 +1,38 @@
+Neste desafio, você terá a missão de compreender o papel dos Bancos de Dados Relacionais (SQL) e Não Relacionais (NoSQL) no contexto de um Engenheiro de Dados. Para isso, anote todos os conceitos, definições e insights que julgar relevantes em um novo repositório Git, aumentando assim seu portfólio de conhecimentos.
+
+
+
+#O que é um BD Relacional (SQL)?
+
+Tipo de banco onde se deseja armazenar informações que tenham relacionamento entre si.
+Onde sabe-se de fato o que será armazenado no banco.
+
+#O que é um BD não relacional (NoSQL)?
+Not Only SQL
+Permite manter uma estrutura de dados não rígida, flexível.
+
+
+#NoSQL não veio para substituir o SQL
+São propostas diferentes, NoSQL veio para fazer coisas que não eram possíveis no SQL.
+Ambos podem ser usados de forma complementar.
+A escabilidade de forma horizontal.
+
+#Como consultar dado armazenado no NoSQL?
+A forma que se pretende realizar a consulta é necessário pensar no inicio
+Na aplicação também é necessário o que é possível ser encontrado e o que se deseja consultar
+
+#Conhecer um SGBD de cada tipo é o suficiente para iniciar?
+Não é necessário conhecer todas as ferramentas que existem, afinal é só um meio.
+É interessante conhecer os conceitos, como os bancos de cada tipo funcionam
+
+#Datalake
+é um repositório designado para armazenamento, processamento e segurança de uma quantidade de dados estruturados, semiestruturados ou não estruturado
+Para um ambiente de dados existem 5 tópicos básicos: Gestão, armazenamento, processamento, disponibilidade e segurança
+
+#Tipo de BD influencia na complexidade?
+Sim, entender a necessidade e o objetivo é necessário, pois é necessário haver uma definição de qual arquitetura irá utilizar, quais as formas de consultas, quais as chaves, quais os index.
+Não o banco em si dificulta, mas sim como as informações serão adicionadas e como serão consultadas. 
+
+
+#Engenharia de dados x Cientista de dados
+Engenheiro é responsável pela preparação dos dados e o cientista irá utilizar as informações geradas pelos cientistas para gerar insights
