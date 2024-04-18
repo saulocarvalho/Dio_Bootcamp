@@ -5,6 +5,7 @@ create database manipulation;
 use manipulation;
 
 
+
 CREATE TABLE bankAccounts (
 	Id_account INT auto_increment PRIMARY KEY,
 	Ag_num INT NOT NULL,
