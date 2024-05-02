@@ -1,0 +1,10 @@
+
+Criar um arquivo txt com o seguinte conteúdo: ALTER USER 'root'@'localhost' IDENTIFIED BY 'test';
+
+
+
+NO CMD: 
+
+C:\Windows\system32>cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysqld --defaults-file="C:\ProgramData\MySQL\MySQL Server 8.0\my.ini" --init-file=C:\Users\SauloCarvalho\change.txt --console
