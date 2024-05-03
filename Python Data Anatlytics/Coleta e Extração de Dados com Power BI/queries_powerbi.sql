@@ -19,3 +19,7 @@ inner join project on Dnum = Dnumber
 group by Pname;
 ###
 
+create database company_desafio;
+grant all privileges
+on company_desafio.*
+to 'powerbi'@'localhost';

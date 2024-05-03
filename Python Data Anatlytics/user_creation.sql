@@ -20,3 +20,5 @@ to 'powerbi'@'localhost';
 grant drop
 on company.test
 to 'powerbi'@'localhost';
+
+
