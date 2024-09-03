@@ -1,0 +1,26 @@
+[
+    {
+        "Titulo": "Return of the Jedi",
+        "Sequencia": 6
+    },
+    {
+        "Titulo": "The Empire Strikes Back",
+        "Sequencia": 5
+    },
+    {
+        "Titulo": "A New Hope",
+        "Sequencia": 4
+    },
+    {
+        "Titulo": "Revenge of the Sith",
+        "Sequencia": 3
+    },
+    {
+        "Titulo": "Attack of the Clones",
+        "Sequencia": 2
+    },
+    {
+        "Titulo": "The Phantom Menace",
+        "Sequencia": 1
+    }
+]
