@@ -1,0 +1,1 @@
+SAMEPERIODLASTYEAR = Comparação entre as mesmas datas do ano anterior
