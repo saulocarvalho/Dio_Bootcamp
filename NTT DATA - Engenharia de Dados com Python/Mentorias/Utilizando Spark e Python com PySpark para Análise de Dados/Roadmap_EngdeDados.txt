@@ -1,0 +1,5 @@
+Roadmap Eng de Dados
+SQL
+Python
+Cloud 
+E muita prática
